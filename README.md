@@ -4,8 +4,6 @@
 
 Project Monet is a full-stack web application designed to help students track their finances with style. Built with Material 3 Expressive design principles, rich typography, and advanced data visualizations.
 
-![Project Monet](https://via.placeholder.com/800x400/6750A4/FFFFFF?text=Project+Monet)
-
 ## ✨ Features
 
 ### Core Functionality
