@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Monet | Student Budget Tracker</title>
+    
+    <!-- Google Fonts - Expressive Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    
+    <!-- Chart.js for Advanced Data Visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- Decorative Background Elements -->
+    <div class="bg-gradient"></div>
+    <div class="bg-pattern"></div>
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- Authentication Views -->
+    <!-- ============================================ -->
+    
+    <div id="auth-view" class="auth-container">
+        <div class="auth-card glass-card">
+            <div class="auth-header">
+                <div class="logo-container">
+                    <div class="logo-icon logo-painting">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Monet_-_Impression%2C_Sunrise.jpg/300px-Monet_-_Impression%2C_Sunrise.jpg" alt="Impression, Sunrise">
+                    </div>
+                    <h1 class="logo-text">Project Monet</h1>
+                </div>
+                <p class="tagline">Paint your financial future</p>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form active">
+                <h2>Welcome Back</h2>
+                <div class="input-group">
+                    <span class="material-icons-round">email</span>
+                    <input type="email" id="login-email" placeholder="Email address" required>
+                    <div class="input-line"></div>
+                </div>
+                <div class="input-group">
+                    <span class="material-icons-round">lock</span>
+                    <input type="password" id="login-password" placeholder="Password" required>
+                    <div class="input-line"></div>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <span>Sign In</span>
+                    <span class="material-icons-round">arrow_forward</span>
+                </button>
+                <p class="auth-switch">
+                    New to Monet? <a href="#" id="show-register">Create account</a>
+                </p>
+            </form>
+            
+            <!-- Register Form -->
+            <form id="register-form" class="auth-form">
+                <h2>Start Your Journey</h2>
+                <div class="input-group">
+                    <span class="material-icons-round">person</span>
+                    <input type="text" id="register-username" placeholder="Username" required>
+                    <div class="input-line"></div>
+                </div>
+                <div class="input-group">
+                    <span class="material-icons-round">email</span>
+                    <input type="email" id="register-email" placeholder="Email address" required>
+                    <div class="input-line"></div>
+                </div>
+                <div class="input-group">
+                    <span class="material-icons-round">lock</span>
+                    <input type="password" id="register-password" placeholder="Password (min 6 characters)" required minlength="6">
+                    <div class="input-line"></div>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <span>Create Account</span>
+                    <span class="material-icons-round">arrow_forward</span>
+                </button>
+                <p class="auth-switch">
+                    Already have an account? <a href="#" id="show-login">Sign in</a>
+                </p>
+            </form>
+            
+            <div id="auth-error" class="error-message"></div>
+        </div>
+        
+        <!-- Decorative Art -->
+        <div class="auth-art">
+            <div class="art-circle art-circle-1"></div>
+            <div class="art-circle art-circle-2"></div>
+            <div class="art-circle art-circle-3"></div>
+            <div class="art-text">
+                <span class="art-number">$</span>
+                <span class="art-word">Smart</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- Main Application View -->
+    <!-- ============================================ -->
+    
+    <div id="app-view" class="app-container hidden">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar glass-card">
+            <div class="sidebar-header">
+                <div class="logo-mini logo-painting">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Monet_-_Impression%2C_Sunrise.jpg/300px-Monet_-_Impression%2C_Sunrise.jpg" alt="Impression, Sunrise">
+                </div>
+                <span class="logo-text-mini">Project Monet</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item active" data-view="dashboard">
+                    <span class="material-icons-round">dashboard</span>
+                    <span class="nav-text">Dashboard</span>
+                </li>
+                <li class="nav-item" data-view="transactions">
+                    <span class="material-icons-round">receipt_long</span>
+                    <span class="nav-text">Transactions</span>
+                </li>
+                <li class="nav-item" data-view="analytics">
+                    <span class="material-icons-round">insights</span>
+                    <span class="nav-text">Analytics</span>
+                </li>
+                <li class="nav-item" data-view="goals">
+                    <span class="material-icons-round">savings</span>
+                    <span class="nav-text">Goals</span>
+                </li>
+                <li class="nav-item" data-view="settings">
+                    <span class="material-icons-round">settings</span>
+                    <span class="nav-text">Settings</span>
+                </li>
+            </ul>
+            
+            <div class="sidebar-theme-selector">
+                <label>
+                    <span class="material-icons-round">palette</span>
+                    Theme
+                </label>
+                <div class="m3-dropdown" id="sidebar-theme-dropdown">
+                    <button type="button" class="m3-dropdown-trigger" id="sidebar-theme-trigger">
+                        <span class="selected-text">Light</span>
+                        <span class="material-icons-round arrow">expand_less</span>
+                    </button>
+                    <div class="m3-dropdown-menu dropup" id="sidebar-theme-menu">
+                        <div class="m3-dropdown-item" data-value="light">Light</div>
+                        <div class="m3-dropdown-item" data-value="dark">Dark</div>
+                        <div class="m3-dropdown-divider"></div>
+                        <div class="m3-dropdown-item" data-value="monet">Monet Colorful</div>
+                        <div class="m3-dropdown-item" data-value="oled">OLED Black</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn-logout">
+                    <span class="material-icons-round">logout</span>
+                    <span>Sign Out</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="app-header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menu-toggle">
+                        <span class="material-icons-round">menu</span>
+                    </button>
+                    <div class="greeting">
+                        <h1 id="greeting-text">Good morning</h1>
+                        <p id="user-greeting">Welcome back, <span id="username-display">User</span></p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="current-date" id="current-date"></div>
+                    <button class="btn btn-fab" id="add-transaction-btn" title="Add Transaction">
+                        <span class="material-icons-round">add</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard View -->
+            <section id="dashboard-view" class="view active">
+                <!-- Summary Cards -->
+                <div class="summary-grid">
+                    <div class="summary-card glass-card income-card">
+                        <div class="card-icon">
+                            <span class="material-icons-round">trending_up</span>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-label">Income</span>
+                            <span class="card-value" id="total-income">$0.00</span>
+                        </div>
+                        <div class="card-trend positive">
+                            <span class="material-icons-round">arrow_upward</span>
+                            <span>This month</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card glass-card expense-card">
+                        <div class="card-icon">
+                            <span class="material-icons-round">trending_down</span>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-label">Expenses</span>
+                            <span class="card-value" id="total-expenses">$0.00</span>
+                        </div>
+                        <div class="card-trend negative">
+                            <span class="material-icons-round">arrow_downward</span>
+                            <span>This month</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card glass-card balance-card">
+                        <div class="card-icon">
+                            <span class="material-icons-round">account_balance_wallet</span>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-label">Balance</span>
+                            <span class="card-value" id="current-balance">$0.00</span>
+                        </div>
+                        <div class="card-trend">
+                            <span class="material-icons-round">sync</span>
+                            <span>Net this month</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card glass-card budget-card">
+                        <div class="card-icon">
+                            <span class="material-icons-round">speed</span>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-label">Budget Left</span>
+                            <span class="card-value" id="budget-remaining">$0.00</span>
+                        </div>
+                        <div class="budget-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="budget-progress-bar"></div>
+                            </div>
+                            <span class="progress-text" id="budget-percentage">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="charts-grid">
+                    <div class="chart-card glass-card">
+                        <div class="chart-header">
+                            <h3>Spending by Category</h3>
+                            <span class="material-icons-round">pie_chart</span>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="category-chart"></canvas>
+                        </div>
+                        <div class="chart-legend" id="category-legend"></div>
+                    </div>
+                    
+                    <div class="chart-card glass-card">
+                        <div class="chart-header">
+                            <h3>Monthly Trends</h3>
+                            <span class="material-icons-round">show_chart</span>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="trends-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="recent-section glass-card">
+                    <div class="section-header">
+                        <h3>Recent Transactions</h3>
+                        <a href="#" class="view-all" data-view="transactions">View All</a>
+                    </div>
+                    <div class="transactions-list" id="recent-transactions">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transactions View -->
+            <section id="transactions-view" class="view">
+                <div class="view-header">
+                    <h2>Transactions</h2>
+                    <div class="view-actions">
+                        <div class="filter-group">
+                            <select id="filter-type" class="filter-select">
+                                <option value="">All Types</option>
+                                <option value="income">Income</option>
+                                <option value="expense">Expense</option>
+                            </select>
+                            <select id="filter-category" class="filter-select">
+                                <option value="">All Categories</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" id="add-transaction-btn-2">
+                            <span class="material-icons-round">add</span>
+                            <span>Add Transaction</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="transactions-table glass-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactions-table-body">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="empty-state hidden" id="no-transactions">
+                    <span class="material-icons-round">receipt_long</span>
+                    <h3>No transactions yet</h3>
+                    <p>Start tracking your finances by adding your first transaction</p>
+                </div>
+            </section>
+
+            <!-- Analytics View -->
+            <section id="analytics-view" class="view">
+                <div class="view-header">
+                    <h2>Analytics</h2>
+                </div>
+                
+                <div class="analytics-grid">
+                    <div class="analytics-card glass-card full-width">
+                        <div class="chart-header">
+                            <h3>Income vs Expenses</h3>
+                            <div class="chart-tabs">
+                                <button class="tab-btn active" data-period="6months">6 Months</button>
+                                <button class="tab-btn" data-period="year">1 Year</button>
+                            </div>
+                        </div>
+                        <div class="chart-container large">
+                            <canvas id="comparison-chart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-card glass-card">
+                        <div class="chart-header">
+                            <h3>Daily Spending</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="daily-chart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-card glass-card">
+                        <div class="chart-header">
+                            <h3>Category Distribution</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="distribution-chart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-card glass-card insights-card">
+                        <div class="chart-header">
+                            <h3>Insights</h3>
+                            <span class="material-icons-round">lightbulb</span>
+                        </div>
+                        <div class="insights-list" id="insights-list">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Goals View -->
+            <section id="goals-view" class="view">
+                <div class="view-header">
+                    <h2>Savings Goals</h2>
+                    <button class="btn btn-primary btn-large" id="add-goal-btn">
+                        <span>New Goal</span>
+                    </button>
+                </div>
+                
+                <div class="goals-grid" id="goals-grid">
+                    <!-- Populated by JavaScript -->
+                </div>
+                
+                <div class="empty-state hidden" id="no-goals">
+                    <span class="material-icons-round">savings</span>
+                    <h3>No savings goals yet</h3>
+                    <p>Set your first savings goal to start building your financial future</p>
+                    <button class="btn btn-primary btn-large" id="add-first-goal-btn">
+                        <span>Create Goal</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Settings View -->
+            <section id="settings-view" class="view">
+                <div class="view-header">
+                    <h2>Settings</h2>
+                </div>
+                
+                <div class="settings-grid">
+                    <div class="settings-card glass-card">
+                        <h3>
+                            <span class="material-icons-round">person</span>
+                            Profile
+                        </h3>
+                        <div class="settings-group">
+                            <label>Username</label>
+                            <input type="text" id="settings-username" disabled>
+                        </div>
+                        <div class="settings-group">
+                            <label>Email</label>
+                            <input type="email" id="settings-email" disabled>
+                        </div>
+                        <div class="settings-group">
+                            <label>Member since</label>
+                            <input type="text" id="settings-member-since" disabled>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-card glass-card">
+                        <h3>
+                            <span class="material-icons-round">account_balance</span>
+                            Budget Settings
+                        </h3>
+                        <div class="settings-group">
+                            <label>Currency</label>
+                            <div class="m3-dropdown" id="currency-dropdown">
+                                <button type="button" class="m3-dropdown-trigger" id="currency-trigger">
+                                    <span class="selected-text">$ USD - US Dollar</span>
+                                    <span class="material-icons-round arrow">expand_more</span>
+                                </button>
+                                <div class="m3-dropdown-menu dropdown" id="currency-menu">
+                                    <div class="m3-dropdown-item" data-value="USD">$ USD - US Dollar</div>
+                                    <div class="m3-dropdown-item" data-value="EUR">€ EUR - Euro</div>
+                                    <div class="m3-dropdown-item" data-value="GBP">£ GBP - British Pound</div>
+                                    <div class="m3-dropdown-item" data-value="JPY">¥ JPY - Japanese Yen</div>
+                                    <div class="m3-dropdown-divider"></div>
+                                    <div class="m3-dropdown-item" data-value="CAD">$ CAD - Canadian Dollar</div>
+                                    <div class="m3-dropdown-item" data-value="AUD">$ AUD - Australian Dollar</div>
+                                    <div class="m3-dropdown-item" data-value="CHF">Fr CHF - Swiss Franc</div>
+                                    <div class="m3-dropdown-item" data-value="CNY">¥ CNY - Chinese Yuan</div>
+                                    <div class="m3-dropdown-divider"></div>
+                                    <div class="m3-dropdown-item" data-value="INR">₹ INR - Indian Rupee</div>
+                                    <div class="m3-dropdown-item" data-value="KRW">₩ KRW - Korean Won</div>
+                                    <div class="m3-dropdown-item" data-value="MXN">$ MXN - Mexican Peso</div>
+                                    <div class="m3-dropdown-item" data-value="BRL">R$ BRL - Brazilian Real</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings-group">
+                            <label>Monthly Budget</label>
+                            <input type="number" id="settings-budget" step="50" min="0" placeholder="Enter budget amount">
+                        </div>
+                        <button class="btn btn-primary" id="save-budget-btn">
+                            <span class="material-icons-round">save</span>
+                            <span>Save Budget</span>
+                        </button>
+                    </div>
+                    
+                    <div class="settings-card glass-card">
+                        <h3>
+                            <span class="material-icons-round">palette</span>
+                            Theme
+                        </h3>
+                        <div class="settings-group">
+                            <label>App Theme</label>
+                            <div class="m3-dropdown" id="settings-theme-dropdown">
+                                <button type="button" class="m3-dropdown-trigger" id="settings-theme-trigger">
+                                    <span class="selected-text">Light</span>
+                                    <span class="material-icons-round arrow">expand_more</span>
+                                </button>
+                                <div class="m3-dropdown-menu dropdown" id="settings-theme-menu">
+                                    <div class="m3-dropdown-item" data-value="light">Light</div>
+                                    <div class="m3-dropdown-item" data-value="dark">Dark</div>
+                                    <div class="m3-dropdown-divider"></div>
+                                    <div class="m3-dropdown-item" data-value="monet">Monet Colorful</div>
+                                    <div class="m3-dropdown-item" data-value="oled">OLED Black</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="theme-description">
+                            Choose a theme that suits your style. Changes are applied immediately.
+                        </p>
+                    </div>
+                    
+                    <div class="settings-card glass-card">
+                        <h3>
+                            <span class="material-icons-round">category</span>
+                            Categories
+                        </h3>
+                        <div class="categories-preview" id="categories-preview">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="settings-card glass-card">
+                        <h3>
+                            <span class="material-icons-round">info</span>
+                            About
+                        </h3>
+                        <div class="about-content">
+                            <div class="app-info">
+                                <div class="logo-mini logo-painting">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Monet_-_Impression%2C_Sunrise.jpg/300px-Monet_-_Impression%2C_Sunrise.jpg" alt="Impression, Sunrise">
+                                </div>
+                                <div>
+                                    <strong>Project Monet</strong>
+                                    <span>Version 1.0.0</span>
+                                </div>
+                            </div>
+                            <p>A beautiful student budget tracker designed to help you paint your financial future with confidence.</p>
+                            <p class="copyright">© 2025 Project Monet. Created with ❤️ by Kunal</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- Modals -->
+    <!-- ============================================ -->
+    
+    <!-- Transaction Modal -->
+    <div id="transaction-modal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h2 id="modal-title">Add Transaction</h2>
+                <button class="modal-close" id="close-transaction-modal">
+                    <span class="material-icons-round">close</span>
+                </button>
+            </div>
+            <form id="transaction-form">
+                <input type="hidden" id="transaction-id">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Type</label>
+                        <div class="type-toggle">
+                            <input type="radio" name="transaction-type" id="type-expense" value="expense" checked>
+                            <label for="type-expense" class="type-btn expense">
+                                <span class="material-icons-round">trending_down</span>
+                                Expense
+                            </label>
+                            <input type="radio" name="transaction-type" id="type-income" value="income">
+                            <label for="type-income" class="type-btn income">
+                                <span class="material-icons-round">trending_up</span>
+                                Income
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="transaction-amount">Amount</label>
+                        <input type="number" id="transaction-amount" step="0.01" min="0" required placeholder="Enter amount">
+                    </div>
+                    <div class="form-group">
+                        <label for="transaction-date">Date</label>
+                        <input type="date" id="transaction-date" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="transaction-category">Category</label>
+                    <select id="transaction-category" required>
+                        <optgroup label="Expenses" id="expense-categories">
+                            <option value="Food & Dining">🍔 Food & Dining</option>
+                            <option value="Transportation">🚗 Transportation</option>
+                            <option value="Shopping">🛍️ Shopping</option>
+                            <option value="Entertainment">🎬 Entertainment</option>
+                            <option value="Bills & Utilities">💡 Bills & Utilities</option>
+                            <option value="Education">📚 Education</option>
+                            <option value="Health">💊 Health</option>
+                            <option value="Personal Care">✨ Personal Care</option>
+                            <option value="Subscriptions">📱 Subscriptions</option>
+                            <option value="Other Expense">📦 Other</option>
+                        </optgroup>
+                        <optgroup label="Income" id="income-categories">
+                            <option value="Salary">💰 Salary</option>
+                            <option value="Part-time Job">⏰ Part-time Job</option>
+                            <option value="Freelance">💻 Freelance</option>
+                            <option value="Allowance">🎁 Allowance</option>
+                            <option value="Scholarship">🎓 Scholarship</option>
+                            <option value="Investment">📈 Investment</option>
+                            <option value="Refund">↩️ Refund</option>
+                            <option value="Other Income">💵 Other</option>
+                        </optgroup>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="transaction-description">Description</label>
+                    <input type="text" id="transaction-description" placeholder="What was this for?">
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-transaction">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="material-icons-round">check</span>
+                        <span id="submit-text">Save</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Goal Modal -->
+    <div id="goal-modal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h2 id="goal-modal-title">Create Goal</h2>
+                <button class="modal-close" id="close-goal-modal">
+                    <span class="material-icons-round">close</span>
+                </button>
+            </div>
+            <form id="goal-form">
+                <input type="hidden" id="goal-id">
+                
+                <div class="form-group">
+                    <label for="goal-name">Goal Name</label>
+                    <input type="text" id="goal-name" placeholder="e.g., New Laptop, Emergency Fund" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="goal-target">Target Amount</label>
+                        <input type="number" id="goal-target" step="1" min="1" required placeholder="Enter target amount">
+                    </div>
+                    <div class="form-group">
+                        <label for="goal-current">Current Amount</label>
+                        <input type="number" id="goal-current" step="1" min="0" value="0" placeholder="Enter current amount">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="goal-deadline">Target Date (Optional)</label>
+                    <input type="date" id="goal-deadline">
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-goal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="material-icons-round">check</span>
+                        <span id="goal-submit-text">Create</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <span class="toast-icon material-icons-round">check_circle</span>
+        <span class="toast-message"></span>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
