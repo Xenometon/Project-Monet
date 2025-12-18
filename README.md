@@ -53,7 +53,7 @@ Project Monet is a full-stack web application designed to help students track th
    ```
    http://localhost:5000
    ```
-→ *When you're done, to stop Self-host, just press **CTRL + C***.
+→ *When you're done, to stop Self-host, just press **CTRL + C** in the terminal.*
 
 ## 📁 Project Structure
 
